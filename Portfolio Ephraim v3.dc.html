@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #07070A; color: #F2EFE9; font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  * { box-sizing: border-box; }
+  a { color: var(--accent, #E8A33D); text-decoration: none; }
+  a:hover { color: #F2EFE9; }
+  ::selection { background: var(--accent, #E8A33D); color: #07070A; }
+  input::placeholder, textarea::placeholder { color: #8A857D; }
+  @keyframes edo-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  @keyframes edo-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes edo-float-a { 0% { transform: translate3d(-4%, -2%, 0) scale(1); } 50% { transform: translate3d(6%, 4%, 0) scale(1.14); } 100% { transform: translate3d(-4%, -2%, 0) scale(1); } }
+  @keyframes edo-float-b { 0% { transform: translate3d(3%, 4%, 0) scale(1.08); } 50% { transform: translate3d(-5%, -3%, 0) scale(1); } 100% { transform: translate3d(3%, 4%, 0) scale(1.08); } }
+  @keyframes edo-sweep { 0% { transform: translate3d(0, -60%, 0); opacity: 0; } 12% { opacity: .5; } 88% { opacity: .5; } 100% { transform: translate3d(0, 60%, 0); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001s !important; animation-iteration-count: 1 !important; } }
+</style>
+</helmet>
+<div style="--accent: {{ accent }}; position: relative; min-height: 100vh; background: #07070A;">
+
+  <div aria-hidden="true" style="position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;">
+    <div style="position: absolute; width: 92vmax; height: 92vmax; left: -30vmax; top: -34vmax; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklch, var(--accent, #E8A33D) 22%, transparent), transparent 62%); filter: blur(30px); animation: edo-float-a 34s ease-in-out infinite; will-change: transform;"></div>
+    <div style="position: absolute; width: 76vmax; height: 76vmax; right: -28vmax; bottom: -30vmax; border-radius: 50%; background: radial-gradient(circle, rgba(90,140,255,.14), transparent 64%); filter: blur(34px); animation: edo-float-b 46s ease-in-out infinite; will-change: transform;"></div>
+    <div style="position: absolute; left: 0; right: 0; top: 0; height: 46%; background: linear-gradient(180deg, transparent, color-mix(in oklch, var(--accent, #E8A33D) 9%, transparent), transparent); animation: edo-sweep 15s ease-in-out infinite; will-change: transform;"></div>
+    <div style="position: absolute; inset: 0; opacity: .05; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(130% 95% at 50% 34%, transparent 38%, rgba(7,7,10,.82) 100%);"></div>
+  </div>
+
+  <header style="position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 13px clamp(16px, 4vw, 56px); border-bottom: 1px solid rgba(242,239,233,.1); background: rgba(7,7,10,.78); backdrop-filter: blur(16px);">
+    <a href="#top" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: .16em; color: #F2EFE9;">E.D.OSIM</a>
+    <nav style="display: flex; flex-wrap: wrap; gap: 8px 18px; margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.4; letter-spacing: .06em; text-transform: uppercase;">
+      <a href="#profil" style="color: #9A968F;">Profil</a>
+      <a href="#projets" style="color: #9A968F;">Projets</a>
+      <a href="#methode" style="color: #9A968F;">Méthode</a>
+      <a href="#stack" style="color: #9A968F;">Stack</a>
+    </nav>
+    <a href="#contact" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 9px 16px; border: 1px solid var(--accent, #E8A33D); color: var(--accent, #E8A33D);" style-hover="background: var(--accent, #E8A33D); color: #07070A;">Démarrer un projet</a>
+  </header>
+
+  <section id="top" style="position: relative; padding: clamp(22px, 3.5vw, 52px) clamp(16px, 4vw, 56px) 0;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: #9A968F;">
+      
+      
+      <span>Développeur full-stack freelance</span><span style="display: inline-flex; align-items: center; gap: 8px; color: #6FCF97; white-space: nowrap;">
+          <span style="flex: 0 0 auto; width: 7px; height: 7px; background: #6FCF97; animation: edo-blink 1.6s steps(1) infinite;"></span>
+          Disponible pour missions
+        </span>
+      
+      
+      <sc-if value="{{ disponible }}" hint-placeholder-val="{{ true }}">
+        
+      </sc-if>
+    </div>
+
+    <div style="position: relative; margin-top: clamp(16px, 2.5vw, 34px);">
+      <div style="display: grid; place-items: center; padding: clamp(10px, 2vw, 26px) 0 0;">
+        <div style="position: relative; width: clamp(210px, 27vw, 380px); aspect-ratio: .84; overflow: hidden; background: #14141A;">
+          <img src="assets/ephraim.png" alt="Portrait d'Ephraïm David Osim" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; filter: grayscale(1) contrast(1.04) brightness(1.02); display: block;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(172deg, color-mix(in oklch, var(--accent, #E8A33D) 30%, transparent), transparent 46%, rgba(7,7,10,.6)); mix-blend-mode: overlay;"></div>
+          <div style="position: absolute; inset: 0; box-shadow: inset 0 -54px 52px -30px #07070A, inset 0 60px 50px -40px #07070A;"></div>
+        </div>
+      </div>
+
+      <h1 style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-52%); margin: 0; text-align: center; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(62px, 15.5vw, 250px); line-height: .8; letter-spacing: -.025em; text-transform: uppercase; color: #F2EFE9; text-shadow: 0 22px 70px rgba(7,7,10,.9), 0 2px 0 rgba(7,7,10,.4); pointer-events: none;">Portfolio</h1>
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: clamp(10px, 1.1vw, 13px); letter-spacing: .34em; text-transform: uppercase; color: var(--accent, #E8A33D); pointer-events: none;">Ephraïm David Osim</div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center; justify-content: center; margin-top: clamp(22px, 3.5vw, 44px); padding-bottom: clamp(28px, 4.5vw, 56px);">
+      <a href="#contact" style="flex: 0 1 300px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: var(--accent, #E8A33D); color: #07070A; font-weight: 700; font-size: 16px;" style-hover="background: #F2EFE9;">
+        Parlons de votre projet
+        <span style="font-family: 'JetBrains Mono', monospace;">→</span>
+      </a>
+      <a href="#projets" style="flex: 0 1 300px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; border: 1px solid rgba(242,239,233,.2); color: #F2EFE9; font-size: 16px;" style-hover="border-color: #F2EFE9;">
+        Voir les 6 produits
+        <span style="font-family: 'JetBrains Mono', monospace;">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <div style="border-top: 1px solid rgba(242,239,233,.1); border-bottom: 1px solid rgba(242,239,233,.1); overflow: hidden; padding: 13px 0; background: rgba(7,7,10,.5);">
+    <div style="display: flex; width: max-content; animation: edo-marquee 38s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #7E7A74;">
+      <span style="padding-right: 26px;">Laravel 12</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">PHP 8.2</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">React</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Inertia.js</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Livewire 3</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Filament 3</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">TypeScript</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Expo / React Native</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Alpine.js</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Tailwind</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">MySQL</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Docker</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">GitHub Actions</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Sentry</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">PWA</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span>
+      <span style="padding-right: 26px;">Laravel 12</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">PHP 8.2</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">React</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Inertia.js</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Livewire 3</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Filament 3</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">TypeScript</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Expo / React Native</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Alpine.js</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Tailwind</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">MySQL</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Docker</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">GitHub Actions</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">Sentry</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span><span style="padding-right: 26px;">PWA</span><span style="padding-right: 26px; color: var(--accent, #E8A33D);">·</span>
+    </div>
+  </div>
+
+  <section id="profil" style="padding: clamp(40px, 6vw, 90px) clamp(16px, 4vw, 56px) clamp(40px, 6vw, 84px);" data-reveal="1">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: baseline; border-top: 1px solid rgba(242,239,233,.12); padding-top: 22px; margin-bottom: clamp(24px, 3.5vw, 44px);">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent, #E8A33D);">01 — Profil</span>
+      
+    </div>
+
+    <div style="border: 1px solid rgba(242,239,233,.14); background: rgba(9,10,12,.86); font-family: 'JetBrains Mono', monospace;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 11px 16px; border-bottom: 1px solid rgba(242,239,233,.12); background: rgba(242,239,233,.04);">
+      <span style="display: flex; gap: 7px;">
+        <span style="width: 11px; height: 11px; border-radius: 50%; background: #3A3A40;"></span>
+        <span style="width: 11px; height: 11px; border-radius: 50%; background: #3A3A40;"></span>
+        <span style="width: 11px; height: 11px; border-radius: 50%; background: var(--accent, #E8A33D);"></span>
+      </span>
+      <span style="font-size: 12.5px; color: #8A857D;">ephraim@abidjan: ~/portfolio — zsh</span>
+    </div>
+    <div style="padding: clamp(18px, 3vw, 34px) clamp(16px, 3vw, 32px);">
+
+    <div style="display: flex; gap: 12px; align-items: baseline;">
+      <span style="color: var(--accent, #E8A33D); font-weight: 700;">$</span>
+      <span style="color: #F2EFE9;">whoami</span>
+    </div>
+    <div style="margin: 10px 0 30px; padding-left: 22px; border-left: 1px solid rgba(242,239,233,.14);">
+      <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(28px, 4.4vw, 52px); line-height: 1.02; letter-spacing: -.01em; text-transform: uppercase; color: #F2EFE9;">Ephraïm David Osim</div>
+      <p style="margin: 8px 0 0; font-size: clamp(13px, 1.5vw, 15px); color: #9A968F;">développeur full-stack freelance · abidjan, côte d'ivoire</p>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: baseline;">
+      <span style="color: var(--accent, #E8A33D); font-weight: 700;">$</span>
+      <span style="color: #F2EFE9;">neofetch</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 18px clamp(22px, 3.5vw, 52px); margin-top: 14px; padding-left: 22px; border-left: 1px solid rgba(242,239,233,.14);">
+      <div style="flex: 0 0 auto; width: clamp(128px, 17vw, 176px);">
+        <div style="position: relative; border: 1px solid rgba(242,239,233,.16); overflow: hidden; background: #14141A;">
+          <img src="assets/ephraim.png" alt="Portrait d'Ephraïm David Osim" style="width: 100%; display: block; filter: grayscale(1) contrast(1.06) brightness(.96);">
+          <div style="position: absolute; inset: 0; background: linear-gradient(160deg, color-mix(in oklch, var(--accent, #E8A33D) 42%, transparent), rgba(9,12,12,.3)); mix-blend-mode: color;"></div>
+          <div style="position: absolute; inset: 0; background: repeating-linear-gradient(180deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px);"></div>
+        </div>
+        <div style="margin-top: 8px; font-size: 11px; color: #7E7A74;">./assets/portrait.jpg</div>
+      </div>
+
+      <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 5px; font-size: 13.5px; color: #B4B0A8; align-self: center;">
+        <div><span style="color: var(--accent, #E8A33D);">backend</span><span style="color: #35383A;"> ······· </span><span>Laravel 11 / 12 · PHP 8.2 · MySQL</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">frontend</span><span style="color: #35383A;"> ······ </span><span>React · Inertia.js · Livewire 3 · Filament 3 · Alpine.js</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">mobile</span><span style="color: #35383A;"> ········ </span><span>Expo / React Native · TypeScript · Zod</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">infra</span><span style="color: #35383A;"> ········· </span><span>VPS Nginx / PHP-FPM · Docker · Cloudflare R2</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">ci/cd</span><span style="color: #35383A;"> ········· </span><span>GitHub Actions · Pest / PHPUnit</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">monitoring</span><span style="color: #35383A;"> ···· </span><span>Sentry · audits sécurité &amp; accessibilité</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">produits</span><span style="color: #35383A;"> ······ </span><span>6 conçus de bout en bout · 1 en production client</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">tests</span><span style="color: #35383A;"> ········· </span><span>297 automatisés sur HorusEvent CI</span></div>
+        <div><span style="color: var(--accent, #E8A33D);">langues</span><span style="color: #35383A;"> ······· </span><span>français · anglais technique</span></div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 30px;">
+      <span style="color: var(--accent, #E8A33D); font-weight: 700;">$</span>
+      <span style="color: #F2EFE9;">cat manifeste.txt</span>
+    </div>
+    <div style="margin-top: 12px; padding: 18px 20px; border: 1px dashed rgba(242,239,233,.18); background: rgba(242,239,233,.03);">
+      <p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(16px, 1.9vw, 21px); line-height: 1.5; color: #F2EFE9; text-wrap: pretty;">L'IA écrit le code plus vite que moi. Elle ne décide pas du modèle de données, ne choisit pas l'isolation d'un tenant, n'assume pas un rollback à 22 h. C'est mon travail. Je m'en sers pour livrer en semaines ce qui prenait des mois — puis je prouve que ça tient : tests, audits, CI/CD, monitoring, documentation de reprise.</p>
+      
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 26px;">
+      <span style="color: var(--accent, #E8A33D); font-weight: 700;">$</span>
+      <span style="width: 9px; height: 16px; background: var(--accent, #E8A33D); animation: edo-blink 1.1s steps(1) infinite;"></span>
+    </div>
+    </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(242,239,233,.12); margin-top: clamp(26px, 4vw, 48px);">
+      <div style="background: rgba(11,11,14,.72); padding: 24px 20px;">
+        <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(42px, 5vw, 68px); line-height: .85;">06</div>
+        <div style="margin-top: 8px; font-size: 14px; line-height: 1.5; color: #9A968F;">produits conçus de bout en bout&nbsp;</div>
+      </div>
+      <div style="background: rgba(11,11,14,.72); padding: 24px 20px;">
+        <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(42px, 5vw, 68px); line-height: .85; color: #6FCF97;">01</div><div style="margin-top: 8px; font-size: 14px; line-height: 1.5; color: #9A968F;">en production&nbsp;</div>
+        
+      </div>
+      
+      <div style="background: rgba(11,11,14,.72); padding: 24px 20px;">
+        <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(42px, 5vw, 68px); line-height: .85;">01</div>
+        <div style="margin-top: 8px; font-size: 14px; line-height: 1.5; color: #9A968F;">SaaS dont je suis le fondateur : HorusPOS. Je porte le produit, pas seulement le code</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" style="padding: 0 clamp(16px, 4vw, 56px) clamp(50px, 8vw, 110px);">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: baseline; border-top: 1px solid rgba(242,239,233,.12); padding-top: 22px; margin-bottom: clamp(24px, 3.5vw, 44px);">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent, #E8A33D);">02 — Projets</span>
+      
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: baseline; font-family: 'JetBrains Mono', monospace; font-size: 14px;">
+      <span style="color: var(--accent, #E8A33D); font-weight: 700;">$</span>
+      <span style="color: #F2EFE9;">ls -la ~/projets</span>
+    </div>
+    <div style="margin-top: 12px; border: 1px solid rgba(242,239,233,.14); font-family: 'JetBrains Mono', monospace; background: rgba(11,11,14,.6);">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; padding: 9px 14px; background: rgba(242,239,233,.04); border-bottom: 1px solid rgba(242,239,233,.12); font-size: 11.5px; letter-spacing: .1em; color: #8A857D;">
+        <span style="flex: 0 0 92px;">STATUT</span>
+        <span style="flex: 0 0 52px;">ANNÉE</span>
+        <span style="flex: 1 1 150px;">PROJET</span>
+        <span style="flex: 1 1 130px;">RÔLE</span>
+        <span style="flex: 2 1 220px;">STACK</span>
+      </div>
+      <a href="#p-horuspos" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid rgba(242,239,233,.07); font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #E8A33D;">dev</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2025→</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">HorusPOS/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">fondateur</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">laravel 12, alpine, docker, sentry</span>
+      </a>
+      <a href="#p-lgc" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid rgba(242,239,233,.07); font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #6FCF97;">prod</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2026</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">LGC-Alert/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">dév. principal</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">laravel 12, react, inertia, tenancy</span>
+      </a>
+      <a href="#p-gym" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid rgba(242,239,233,.07); font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #7FB2E8;">staging</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2025</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">Gym-Manager/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">dév. principal</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">laravel 12, pwa, indexeddb, sw</span>
+      </a>
+      <a href="#p-ligne-rouge" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid rgba(242,239,233,.07); font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #7FB2E8;">staging</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2025</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">Ligne-Rouge/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">dév. principal</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">laravel 11, livewire 3, filament 3</span>
+      </a>
+      <a href="#p-horusevent" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid rgba(242,239,233,.07); font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #E8A33D;">dev</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2026</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">HorusEvent-CI/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">dév. principal</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">laravel 12, alpine, r2, pwa</span>
+      </a>
+      <a href="#p-babiride" style="display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; font-size: 13px; color: #B4B0A8;" style-hover="background: rgba(242,239,233,.05); color: #F2EFE9;">
+        <span style="flex: 0 0 92px; color: #E8A33D;">dev</span>
+        <span style="flex: 0 0 52px; color: #8A857D;">2026</span>
+        <span style="flex: 1 1 150px; color: #F2EFE9;">BABIRIDE/</span>
+        <span style="flex: 1 1 130px; color: #9A968F;">dév. secondaire</span>
+        <span style="flex: 2 1 220px; color: #8A857D;">typescript, expo, react, zod</span>
+      </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(16px, 2vw, 24px); margin-top: clamp(26px, 4vw, 44px);">
+
+      <article id="p-horuspos" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: var(--accent, #E8A33D); transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">01</div>
+        <div style="aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <img src="assets/horuspos-dashboard.jpg" alt="Tableau de bord HorusPOS" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block;">
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; background: var(--accent, #E8A33D); color: #07070A;">Fondateur &amp; dév. principal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">En développement · 2025 →</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">HorusPOS</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">caisse &amp; commandes pour restaurants</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">Le client scanne le QR de sa table, commande depuis son téléphone, la cuisine reçoit le ticket en temps réel, le gérant sort son rapport de journée en PDF ou Excel.</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>Laravel 12</span><span>PHP 8.2</span><span>Alpine.js</span><span>Tailwind</span><span>Docker</span><span>Sentry</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-lgc" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: #6FCF97; transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">02</div>
+        <div style="aspect-ratio: 16 / 10; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="slot-lgc-alert" shape="rect" placeholder="Capture LGC Alert — tableau de bord ou envoi de campagne SMS" hint-size="100%,100%"></x-import>
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Développeur principal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; background: #6FCF97; color: #08170F;">En production · 2026</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">LGC Alert</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">saas sms multi-tenant · lawson general company</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">SaaS multi-tenant de notification SMS, généralisable à tout secteur — assurance, mairie, hôpital — via des modules métier configurables sans écrire de code.</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>Laravel 12</span><span>React</span><span>Inertia.js</span><span>stancl/tenancy</span><span>MySQL</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-gym" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: var(--accent, #E8A33D); transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">03</div>
+        <div style="aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <img src="assets/gym-dashboard.jpg" alt="Tableau de bord Gym Manager" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block;">
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Développeur principal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Prêt au déploiement · 2025</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">Gym Manager</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">pwa de gestion de salle de sport</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">Membres, abonnements, présences, caisse. Le vrai sujet technique n'est pas le CRUD — c'est que la connexion coupe et que le pointage à l'entrée doit continuer.</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>Laravel 12</span><span>Bootstrap 5</span><span>MySQL</span><span>IndexedDB</span><span>Service Worker</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-ligne-rouge" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: var(--accent, #E8A33D); transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">04</div>
+        <div style="aspect-ratio: 16 / 10; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="slot-ligne-rouge" shape="rect" placeholder="Capture Ligne Rouge — écran de caisse ou back-office Filament" hint-size="100%,100%"></x-import>
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Développeur principal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Prêt au déploiement · 2025</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">Ligne Rouge</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">caisse &amp; stock multi-boutique</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">Logiciel de caisse et de gestion de stock pour commerce de détail multi-boutique : transferts entre magasins, commandes fournisseurs, crédits clients, impression de tickets thermiques, back-office Filament.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>Laravel 11</span><span>Livewire 3</span><span>Filament 3</span><span>escpos-php</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-horusevent" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: var(--accent, #E8A33D); transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">05</div>
+        <div style="aspect-ratio: 16 / 10; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="slot-horusevent" shape="rect" placeholder="Capture HorusEvent CI — invitation animée ou contrôle d'accès QR" hint-size="100%,100%"></x-import>
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Développeur principal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">En développement · 2026</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">HorusEvent CI</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">saas événementiel pour mariages</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">De l'invitation au repas servi : invitations digitales animées, RSVP, contrôle d'accès par QR, commande de repas par QR de table, galerie photo partagée.</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>Laravel 12</span><span>Alpine.js</span><span>Cloudflare R2</span><span>PWA</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="p-babiride" style="position: relative; border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease;" style-hover="border-color: var(--accent, #E8A33D); transform: translateY(-4px);" data-reveal="1">
+        <div style="position: absolute; top: 14px; right: 16px; z-index: 2; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(242,239,233,.35);">06</div>
+        <div style="aspect-ratio: 16 / 10; border-bottom: 1px solid rgba(242,239,233,.14); background: #14141A;">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="slot-babiride" shape="rect" placeholder="Capture BABIRIDE — réservation mobile ou dispatch chauffeurs" hint-size="100%,100%"></x-import>
+        </div>
+        <div style="padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; flex: 1 1 auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">Développeur secondaire</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(242,239,233,.24); color: #9A968F;">En développement · 2026</span>
+          </div>
+          <h3 style="margin: 16px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(32px, 3.4vw, 46px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase;">BABIRIDE</h3>
+          <div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D;">covoiturage domicile-travail à abidjan</div>
+          <p style="margin: 16px 0 0; font-size: 16px; line-height: 1.55; text-wrap: pretty;">Réservation matin et soir, tickets QR, suivi de trajet en direct, dashboard admin avec dispatch des chauffeurs. Monorepo pnpm, application mobile Expo Router bilingue FR/EN.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E7A74;">
+            <span>TypeScript</span><span>Expo / React Native</span><span>React</span><span>Zod</span><span>pnpm</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="methode" style="padding: 0 clamp(16px, 4vw, 56px) clamp(50px, 8vw, 110px);" data-reveal="1">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: baseline; border-top: 1px solid rgba(242,239,233,.12); padding-top: 22px; margin-bottom: clamp(26px, 4vw, 52px);">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent, #E8A33D);">03 — Méthode</span>
+      
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: clamp(24px, 3vw, 44px);">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D; letter-spacing: .16em;">ÉTAPE 01</div>
+        <h3 style="margin: 12px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.01em;">Cadrage métier</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9A968F; text-wrap: pretty;">Je passe une journée dans le métier avant d'écrire une ligne : comment on encaisse, qui imprime le ticket, ce qui se passe quand le réseau tombe. Le modèle de données sort de là.</p>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D; letter-spacing: .16em;">ÉTAPE 02</div>
+        <h3 style="margin: 12px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.01em;">Construction assistée par IA</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9A968F; text-wrap: pretty;">L'IA accélère l'écriture du code, jamais les décisions. Architecture, découpage, isolation des données, arbitrages de sécurité : ce sont des choix que je relis et que j'assume ligne par ligne.</p>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D; letter-spacing: .16em;">ÉTAPE 03</div>
+        <h3 style="margin: 12px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.01em;">Preuve avant livraison</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9A968F; text-wrap: pretty;">Tests automatisés sur les parcours qui touchent à l'argent et aux données. Audits sécurité et accessibilité. Rien ne part en production sur la foi d'un « ça marche chez moi ».</p>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A857D; letter-spacing: .16em;">ÉTAPE 04</div>
+        <h3 style="margin: 12px 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -.01em;">Mise en production réelle</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9A968F; text-wrap: pretty;">CI/CD GitHub Actions, VPS Nginx / PHP-FPM / MySQL, monitoring Sentry, sauvegardes, documentation de reprise. Le projet vous appartient, y compris sans moi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" style="padding: 0 clamp(16px, 4vw, 56px) clamp(50px, 8vw, 110px);" data-reveal="1">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: baseline; border-top: 1px solid rgba(242,239,233,.12); padding-top: 22px; margin-bottom: clamp(26px, 4vw, 52px);">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent, #E8A33D);">04 — Stack</span>
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; letter-spacing: -.01em; text-transform: uppercase;">Ce que je maîtrise en production</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(16px, 2vw, 24px);">
+      <div style="border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); padding: clamp(20px, 2.4vw, 28px); transition: border-color .3s ease;" style-hover="border-color: var(--accent, #E8A33D);">
+        <h3 style="margin: 0 0 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent, #E8A33D);">Backend</h3>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px;">
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Laravel 11 / 12</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">PHP 8.2</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">MySQL</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Multi-tenancy (stancl/tenancy)</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Files d'attente &amp; temps réel</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Exports PDF / Excel</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Node.js · TypeScript</li>
+        </ul>
+      </div>
+      <div style="border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); padding: clamp(20px, 2.4vw, 28px); transition: border-color .3s ease;" style-hover="border-color: var(--accent, #E8A33D);">
+        <h3 style="margin: 0 0 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent, #E8A33D);">Frontend &amp; mobile</h3>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px;">
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">React</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Inertia.js</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Livewire 3</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Filament 3</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Alpine.js</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Tailwind CSS</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Bootstrap 5</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Expo / React Native</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">PWA · IndexedDB · SW</li>
+        </ul>
+      </div>
+      <div style="border: 1px solid rgba(242,239,233,.14); background: rgba(13,13,16,.82); padding: clamp(20px, 2.4vw, 28px); transition: border-color .3s ease;" style-hover="border-color: var(--accent, #E8A33D);">
+        <h3 style="margin: 0 0 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent, #E8A33D);">Infra &amp; qualité</h3>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px;">
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">CI/CD GitHub Actions</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">VPS Nginx / PHP-FPM</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Docker</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Cloudflare R2</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Pest / PHPUnit</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Sentry</li>
+          <li style="border: 1px solid rgba(242,239,233,.14); background: rgba(242,239,233,.03); padding: 8px 12px; font-size: 14px;">Audits sécurité &amp; a11y</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-top: 1px solid rgba(242,239,233,.12); padding: clamp(44px, 7vw, 100px) clamp(16px, 4vw, 56px) clamp(36px, 5vw, 66px);">
+    <div style="display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 72px);">
+      <div style="flex: 1 1 340px; min-width: 0;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent, #E8A33D);">05 — Contact</span>
+        <h2 style="margin: 18px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(44px, 7vw, 116px); line-height: .84; letter-spacing: -.02em; text-transform: uppercase;">On<br>construit<br>quoi ?</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.55; color: #9A968F; max-width: 46ch; text-wrap: pretty;">Décrivez le problème métier, même en trois lignes. Je réponds sous 24 h avec un premier cadrage : ce que je ferais, dans quel ordre, et en combien de temps.</p>
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 32px; font-size: 16px;">
+          <a href="mailto:mrephraim2.0@gmail.com" style="display: flex; align-items: center; gap: 12px; color: #F2EFE9;" style-hover="color: var(--accent, #E8A33D);">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8A857D; width: 76px;">EMAIL</span>
+            mrephraim2.0@gmail.com
+          </a>
+          <a href="tel:+2250160689239" style="display: flex; align-items: center; gap: 12px; color: #F2EFE9;" style-hover="color: var(--accent, #E8A33D);">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8A857D; width: 76px;">TÉL</span>
+            +225 01 60 68 92 39
+          </a>
+          <a href="https://www.linkedin.com/in/ephraïm-david-osim" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 12px; color: #F2EFE9;" style-hover="color: var(--accent, #E8A33D);">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8A857D; width: 76px;">LINKEDIN</span>
+            ephraïm-david-osim
+          </a>
+          <div style="display: flex; align-items: center; gap: 12px; color: #9A968F;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #8A857D; width: 76px;">BASE</span>
+            Abidjan, Côte d'Ivoire — missions à distance acceptées
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 380px; min-width: 0; border: 1px solid rgba(242,239,233,.14); padding: clamp(22px, 3vw, 40px); background: rgba(15,15,18,.86);">
+        <sc-if value="{{ envoye }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 14px; min-height: 320px; justify-content: center;">
+            <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: .9; text-transform: uppercase; color: #6FCF97;">Brief prêt</div>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #9A968F;">Votre client mail vient de s'ouvrir avec le message pré-rempli. S'il ne s'est rien passé, écrivez directement à <a href="mailto:mrephraim2.0@gmail.com">mrephraim2.0@gmail.com</a>.</p>
+            <button type="button" onClick="{{ reinitialiser }}" style="align-self: flex-start; margin-top: 8px; background: none; border: 1px solid rgba(242,239,233,.24); color: #F2EFE9; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 12px 18px; cursor: pointer;" style-hover="border-color: #F2EFE9;">Écrire un autre message</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ pasEnvoye }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ envoyer }}" style="display: flex; flex-direction: column; gap: 18px;">
+            <label style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8A857D;">Nom</span>
+              <input name="nom" type="text" required="required" placeholder="Votre nom" style="background: #0B0B0C; border: 1px solid rgba(242,239,233,.18); color: #F2EFE9; font-family: 'Space Grotesk', sans-serif; font-size: 16px; padding: 14px 16px; outline: none;" style-focus="border-color: var(--accent, #E8A33D);">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8A857D;">Email</span>
+              <input name="email" type="email" required="required" placeholder="vous@entreprise.com" style="background: #0B0B0C; border: 1px solid rgba(242,239,233,.18); color: #F2EFE9; font-family: 'Space Grotesk', sans-serif; font-size: 16px; padding: 14px 16px; outline: none;" style-focus="border-color: var(--accent, #E8A33D);">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8A857D;">Type de projet</span>
+              <select name="type" style="background: #0B0B0C; border: 1px solid rgba(242,239,233,.18); color: #F2EFE9; font-family: 'Space Grotesk', sans-serif; font-size: 16px; padding: 14px 16px; outline: none;" style-focus="border-color: var(--accent, #E8A33D);">
+                <option value="Logiciel métier sur mesure">Logiciel métier sur mesure</option>
+                <option value="Caisse / point de vente">Caisse / point de vente</option>
+                <option value="SaaS multi-tenant">SaaS multi-tenant</option>
+                <option value="Application mobile">Application mobile</option>
+                <option value="Reprise / audit d'un projet existant">Reprise ou audit d'un projet existant</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8A857D;">Le problème à résoudre</span>
+              <textarea name="message" rows="5" required="required" placeholder="Ce qui ne marche pas aujourd'hui, qui l'utilisera, et pour quand." style="background: #0B0B0C; border: 1px solid rgba(242,239,233,.18); color: #F2EFE9; font-family: 'Space Grotesk', sans-serif; font-size: 16px; padding: 14px 16px; outline: none; resize: vertical;" style-focus="border-color: var(--accent, #E8A33D);"></textarea>
+            </label>
+            <button type="submit" style="background: var(--accent, #E8A33D); color: #07070A; border: none; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; padding: 17px 20px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 12px;" style-hover="background: #F2EFE9;">
+              Envoyer le brief
+              <span style="font-family: 'JetBrains Mono', monospace;">→</span>
+            </button>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(242,239,233,.12); padding: 26px clamp(16px, 4vw, 56px) 34px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #8A857D;">
+    <span>Ephraïm David Osim — Développeur full-stack</span>
+    <span style="margin-left: auto;">Abidjan · CI</span>
+    <a href="#top" style="color: #9A968F;">Haut de page ↑</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E8A33D&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#E8A33D&quot;,&quot;#6FCF97&quot;,&quot;#FF5A1F&quot;,&quot;#F2EFE9&quot;],&quot;section&quot;:&quot;Identité&quot;},&quot;disponible&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Statut&quot;}}">
+class Component extends DCLogic {
+  state = { envoye: false };
+
+  componentDidMount() {
+    const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!nodes.length) return;
+    const vh = window.innerHeight;
+    const cible = nodes.filter((n) => n.getBoundingClientRect().top > vh * 0.92);
+    cible.forEach((n) => {
+      n.style.opacity = '0';
+      n.style.transform = 'translateY(24px)';
+      n.style.transition = 'opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)';
+    });
+    const reveal = (n) => { n.style.opacity = '1'; n.style.transform = 'none'; };
+    if (!('IntersectionObserver' in window)) { cible.forEach(reveal); return; }
+    this._obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { reveal(e.target); this._obs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.04 });
+    cible.forEach((n) => this._obs.observe(n));
+    this._secours = setTimeout(() => cible.forEach(reveal), 4000);
+  }
+
+  componentWillUnmount() {
+    if (this._obs) this._obs.disconnect();
+    clearTimeout(this._secours);
+  }
+
+  renderVals() {
+    return {
+      accent: this.props.accentColor ?? '#E8A33D',
+      disponible: this.props.disponible ?? true,
+      envoye: this.state.envoye,
+      pasEnvoye: !this.state.envoye,
+      reinitialiser: () => this.setState({ envoye: false }),
+      envoyer: (e) => {
+        e.preventDefault();
+        const f = e.target.elements;
+        const val = (k) => (f[k] && f[k].value ? f[k].value.trim() : '');
+        const corps = [
+          'Nom : ' + val('nom'),
+          'Email : ' + val('email'),
+          'Type de projet : ' + val('type'),
+          '',
+          val('message'),
+        ].join('\n');
+        window.location.href = 'mailto:mrephraim2.0@gmail.com?subject='
+          + encodeURIComponent('Projet — ' + (val('nom') || 'nouveau contact'))
+          + '&body=' + encodeURIComponent(corps);
+        this.setState({ envoye: true });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
