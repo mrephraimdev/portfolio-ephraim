@@ -468,7 +468,9 @@ export function SqueezeCarousel({
                             }}
                         >
                             <p className="max-w-[46rem] text-[15px] leading-[1.6] text-balance @lg:text-[17px]">
-                                <span className="text-foreground">{slide.title}</span>{" "}
+                                <span className="font-display block text-2xl font-bold text-foreground @lg:text-3xl">
+                                    {slide.title}
+                                </span>
                                 {slide.description && (
                                     <span className="text-muted-foreground">{slide.description}</span>
                                 )}
@@ -515,9 +517,38 @@ function Picture({ slide }: { slide: SqueezeSlide }) {
     return (
         <span
             aria-hidden="true"
-            className="absolute inset-y-0 left-1/2 -translate-x-1/2"
+            className="absolute inset-y-0 left-1/2 flex -translate-x-1/2 items-center justify-center"
             style={{ background: slide.background, ...box }}
-        />
+        >
+            <span
+                className="font-mono flex flex-col items-center gap-2 px-4 text-center"
+                style={{ color: "rgba(242,239,233,.4)" }}
+            >
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect
+                        x="2.5"
+                        y="4.5"
+                        width="19"
+                        height="15"
+                        rx="1.5"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                        strokeDasharray="3.5 3"
+                    />
+                    <circle cx="8" cy="10" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+                    <path
+                        d="M4 16.5 9 12l3.5 3.2L15.5 12 20 16"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+                <span className="text-[10px] uppercase tracking-[.14em] @lg:text-[11px]">
+                    Capture à venir
+                </span>
+            </span>
+        </span>
     );
 }
 
