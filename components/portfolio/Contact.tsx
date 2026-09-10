@@ -1,4 +1,5 @@
 import ContactForm from "./ContactForm";
+import Reveal from "./Reveal";
 
 export default function Contact() {
   return (
@@ -10,7 +11,7 @@ export default function Contact() {
       }}
     >
       <div style={{ display: "flex", flexWrap: "wrap", gap: "clamp(28px, 4vw, 72px)" }}>
-        <div style={{ flex: "1 1 340px", minWidth: 0 }}>
+        <Reveal style={{ flex: "1 1 340px", minWidth: 0 }}>
           <span
             className="font-mono"
             style={{
@@ -74,9 +75,10 @@ export default function Contact() {
               Abidjan, Côte d&apos;Ivoire — missions à distance acceptées
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div
+        <Reveal
+          delay={0.12}
           style={{
             flex: "1 1 380px",
             minWidth: 0,
@@ -86,7 +88,7 @@ export default function Contact() {
           }}
         >
           <ContactForm />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

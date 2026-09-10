@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./Stagger";
 
 const STEPS = [
   {
@@ -50,7 +51,7 @@ export default function Method() {
             03 — Méthode
           </span>
         </div>
-        <div
+        <StaggerGroup
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(255px, 1fr))",
@@ -58,7 +59,7 @@ export default function Method() {
           }}
         >
           {STEPS.map((s) => (
-            <div key={s.n}>
+            <StaggerItem key={s.n}>
               <div className="font-mono" style={{ fontSize: 12, color: "#8A857D", letterSpacing: ".16em" }}>
                 {s.n}
               </div>
@@ -68,9 +69,9 @@ export default function Method() {
               <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#9A968F", textWrap: "pretty" }}>
                 {s.text}
               </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </section>
     </Reveal>
   );

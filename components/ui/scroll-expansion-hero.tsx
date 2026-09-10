@@ -161,8 +161,8 @@ const ScrollExpandMedia = ({
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
-  const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
-  const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
+  const mediaWidth = scrollProgress * (isMobileState ? 1400 : 2600);
+  const mediaHeight = scrollProgress * (isMobileState ? 1100 : 1500);
   const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(" ")[0] : "";
@@ -186,6 +186,7 @@ const ScrollExpandMedia = ({
               alt="Background"
               width={1920}
               height={1080}
+              sizes="100vw"
               className="w-screen h-screen"
               style={{
                 objectFit: "cover",
@@ -275,6 +276,7 @@ const ScrollExpandMedia = ({
                       alt={title || "Media content"}
                       width={1280}
                       height={720}
+                      sizes="95vw"
                       className="w-full h-full object-cover rounded-xl"
                     />
 

@@ -16,9 +16,11 @@
     "next": "^14.2.35",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.35.4",
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

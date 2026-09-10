@@ -1,6 +1,15 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { EASE } from "./Reveal";
+
 export default function Footer() {
   return (
-    <footer
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.7, ease: EASE }}
       className="font-mono"
       style={{
         borderTop: "1px solid rgba(242,239,233,.12)",
@@ -20,6 +29,6 @@ export default function Footer() {
       <a href="#top" style={{ color: "#9A968F" }}>
         Haut de page ↑
       </a>
-    </footer>
+    </motion.footer>
   );
 }

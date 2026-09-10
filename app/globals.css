@@ -201,3 +201,27 @@ body {
 .edo-submit-btn:hover {
   background: #f2efe9 !important;
 }
+
+/* Projets — le tableau "ls -la" a trop de colonnes à largeur fixe pour un
+   écran étroit ; sous 640px on masque les libellés d'en-tête (le code
+   couleur + le gras du nom de projet suffisent à lire chaque ligne) et on
+   empile les champs de chaque ligne verticalement plutôt que de les laisser
+   se répartir en un retour à la ligne incohérent avec l'en-tête. */
+@media (max-width: 640px) {
+  .edo-proj-head {
+    display: none;
+  }
+  .edo-proj-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  /* Each field carries an inline flex-basis (e.g. "0 0 92px") sized for a
+     horizontal row — in column direction that basis applies to height
+     instead of width, forcing tall empty gaps. Reset it so fields stack at
+     their natural text height. */
+  .edo-proj-row > span {
+    flex: none !important;
+    width: auto !important;
+  }
+}

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { motion } from "framer-motion";
+import { EASE } from "./Reveal";
 
 const inputStyle: React.CSSProperties = {
   background: "#0B0B0C",
@@ -37,7 +39,12 @@ export default function ContactForm() {
 
   if (envoye) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, minHeight: 320, justifyContent: "center" }}>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: EASE }}
+        style={{ display: "flex", flexDirection: "column", gap: 14, minHeight: 320, justifyContent: "center" }}
+      >
         <div
           className="font-display"
           style={{ fontWeight: 900, fontSize: 44, lineHeight: 0.9, textTransform: "uppercase", color: "#6FCF97" }}
@@ -49,9 +56,12 @@ export default function ContactForm() {
           s&apos;est rien passé, écrivez directement à{" "}
           <a href="mailto:mrephraim2.0@gmail.com">mrephraim2.0@gmail.com</a>.
         </p>
-        <button
+        <motion.button
           type="button"
           onClick={() => setEnvoye(false)}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ duration: 0.2, ease: EASE }}
           className="font-mono edo-reset-btn"
           style={{
             alignSelf: "flex-start",
@@ -67,8 +77,8 @@ export default function ContactForm() {
           }}
         >
           Écrire un autre message
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     );
   }
 
@@ -112,9 +122,12 @@ export default function ContactForm() {
           style={{ ...inputStyle, resize: "vertical" }}
         />
       </label>
-      <button
+      <motion.button
         type="submit"
         className="edo-submit-btn"
+        whileHover="hover"
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2, ease: EASE }}
         style={{
           background: "var(--accent, #E8A33D)",
           color: "#07070A",
@@ -132,8 +145,14 @@ export default function ContactForm() {
         }}
       >
         Envoyer le brief
-        <span className="font-mono">→</span>
-      </button>
+        <motion.span
+          className="font-mono"
+          variants={{ hover: { x: 4 } }}
+          transition={{ duration: 0.2, ease: EASE }}
+        >
+          →
+        </motion.span>
+      </motion.button>
     </form>
   );
 }

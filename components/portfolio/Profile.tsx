@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./Stagger";
 
 const NEOFETCH_ROWS: [string, string, string][] = [
   ["backend", "·······", "Laravel 11 / 12 · PHP 8.2 · MySQL"],
@@ -131,7 +132,7 @@ export default function Profile() {
                   }}
                 >
                   <Image
-                    src="/assets/ephraim.png"
+                    src="/assets/neofetch.jpg"
                     alt="Portrait d'Ephraïm David Osim"
                     fill
                     sizes="176px"
@@ -163,7 +164,7 @@ export default function Profile() {
                 </div>
               </div>
 
-              <div
+              <StaggerGroup
                 style={{
                   flex: "1 1 340px",
                   minWidth: 0,
@@ -176,13 +177,13 @@ export default function Profile() {
                 }}
               >
                 {NEOFETCH_ROWS.map(([label, dots, value]) => (
-                  <div key={label}>
+                  <StaggerItem key={label}>
                     <span style={{ color: "var(--accent, #E8A33D)" }}>{label}</span>
                     <span style={{ color: "#35383A" }}> {dots} </span>
                     <span>{value}</span>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerGroup>
             </div>
 
             <div style={{ display: "flex", gap: 12, alignItems: "baseline", marginTop: 30 }}>
@@ -230,7 +231,7 @@ export default function Profile() {
           </div>
         </div>
 
-        <div
+        <StaggerGroup
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
@@ -239,15 +240,15 @@ export default function Profile() {
             marginTop: "clamp(26px, 4vw, 48px)",
           }}
         >
-          <div style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
+          <StaggerItem style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
             <div className="font-display" style={{ fontWeight: 900, fontSize: "clamp(42px, 5vw, 68px)", lineHeight: 0.85 }}>
               06
             </div>
             <div style={{ marginTop: 8, fontSize: 14, lineHeight: 1.5, color: "#9A968F" }}>
               produits conçus de bout en bout&nbsp;
             </div>
-          </div>
-          <div style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
+          </StaggerItem>
+          <StaggerItem style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
             <div
               className="font-display"
               style={{ fontWeight: 900, fontSize: "clamp(42px, 5vw, 68px)", lineHeight: 0.85, color: "#6FCF97" }}
@@ -257,16 +258,16 @@ export default function Profile() {
             <div style={{ marginTop: 8, fontSize: 14, lineHeight: 1.5, color: "#9A968F" }}>
               en production&nbsp;
             </div>
-          </div>
-          <div style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
+          </StaggerItem>
+          <StaggerItem style={{ background: "rgba(11,11,14,.72)", padding: "24px 20px" }}>
             <div className="font-display" style={{ fontWeight: 900, fontSize: "clamp(42px, 5vw, 68px)", lineHeight: 0.85 }}>
               01
             </div>
             <div style={{ marginTop: 8, fontSize: 14, lineHeight: 1.5, color: "#9A968F" }}>
               SaaS dont je suis le fondateur : HorusPOS. Je porte le produit, pas seulement le code
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </section>
     </Reveal>
   );

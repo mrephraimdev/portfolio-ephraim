@@ -1,3 +1,6 @@
+import Reveal from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./Stagger";
+
 const COLUMNS = [
   {
     title: "Backend",
@@ -42,43 +45,45 @@ const COLUMNS = [
 export default function Stack() {
   return (
     <section id="stack" style={{ padding: "0 clamp(16px, 4vw, 56px) clamp(50px, 8vw, 110px)" }}>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px 32px",
-          alignItems: "baseline",
-          borderTop: "1px solid rgba(242,239,233,.12)",
-          paddingTop: 22,
-          marginBottom: "clamp(26px, 4vw, 52px)",
-        }}
-      >
-        <span
-          className="font-mono"
+      <Reveal>
+        <div
           style={{
-            fontSize: 12,
-            letterSpacing: ".18em",
-            textTransform: "uppercase",
-            color: "var(--accent, #E8A33D)",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "16px 32px",
+            alignItems: "baseline",
+            borderTop: "1px solid rgba(242,239,233,.12)",
+            paddingTop: 22,
+            marginBottom: "clamp(26px, 4vw, 52px)",
           }}
         >
-          04 — Stack
-        </span>
-        <h2
-          className="font-display"
-          style={{
-            margin: 0,
-            fontWeight: 800,
-            fontSize: "clamp(30px, 3.6vw, 56px)",
-            lineHeight: 1,
-            letterSpacing: "-.01em",
-            textTransform: "uppercase",
-          }}
-        >
-          Ce que je maîtrise en production
-        </h2>
-      </div>
-      <div
+          <span
+            className="font-mono"
+            style={{
+              fontSize: 12,
+              letterSpacing: ".18em",
+              textTransform: "uppercase",
+              color: "var(--accent, #E8A33D)",
+            }}
+          >
+            04 — Stack
+          </span>
+          <h2
+            className="font-display"
+            style={{
+              margin: 0,
+              fontWeight: 800,
+              fontSize: "clamp(30px, 3.6vw, 56px)",
+              lineHeight: 1,
+              letterSpacing: "-.01em",
+              textTransform: "uppercase",
+            }}
+          >
+            Ce que je maîtrise en production
+          </h2>
+        </div>
+      </Reveal>
+      <StaggerGroup
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))",
@@ -86,7 +91,7 @@ export default function Stack() {
         }}
       >
         {COLUMNS.map((col) => (
-          <div
+          <StaggerItem
             key={col.title}
             className="edo-stack-card"
             style={{
@@ -108,10 +113,14 @@ export default function Stack() {
             >
               {col.title}
             </h3>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <StaggerGroup
+              as="ul"
+              style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexWrap: "wrap", gap: 8 }}
+            >
               {col.items.map((item) => (
-                <li
+                <StaggerItem
                   key={item}
+                  as="li"
                   style={{
                     border: "1px solid rgba(242,239,233,.14)",
                     background: "rgba(242,239,233,.03)",
@@ -120,12 +129,12 @@ export default function Stack() {
                   }}
                 >
                   {item}
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
-          </div>
+            </StaggerGroup>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

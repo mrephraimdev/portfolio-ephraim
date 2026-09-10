@@ -1,6 +1,5 @@
 import BackgroundFx from "@/components/portfolio/BackgroundFx";
 import Header from "@/components/portfolio/Header";
-import Hero from "@/components/portfolio/Hero";
 import ScrollShowcase from "@/components/portfolio/ScrollShowcase";
 import Marquee from "@/components/portfolio/Marquee";
 import Profile from "@/components/portfolio/Profile";
@@ -28,7 +27,6 @@ export default function Home() {
       <BackgroundFx />
       <Header />
       <ScrollShowcase />
-      <Hero />
       <Marquee />
       <Profile />
       <Projects />

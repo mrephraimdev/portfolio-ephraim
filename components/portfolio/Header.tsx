@@ -1,6 +1,24 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { EASE } from "./Reveal";
+
+const LINKS = [
+  { href: "#profil", label: "Profil" },
+  { href: "#projets", label: "Projets" },
+  { href: "#methode", label: "Méthode" },
+  { href: "#stack", label: "Stack" },
+];
+
 export default function Header() {
+  const [hovered, setHovered] = useState<string | null>(null);
+
   return (
-    <header
+    <motion.header
+      initial={{ y: -12, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: EASE }}
       style={{
         position: "sticky",
         top: 0,
@@ -29,6 +47,7 @@ export default function Header() {
       </a>
       <nav
         className="font-mono"
+        onMouseLeave={() => setHovered(null)}
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -40,22 +59,38 @@ export default function Header() {
           textTransform: "uppercase",
         }}
       >
-        <a href="#profil" className="edo-nav-link" style={{ color: "#9A968F" }}>
-          Profil
-        </a>
-        <a href="#projets" className="edo-nav-link" style={{ color: "#9A968F" }}>
-          Projets
-        </a>
-        <a href="#methode" className="edo-nav-link" style={{ color: "#9A968F" }}>
-          Méthode
-        </a>
-        <a href="#stack" className="edo-nav-link" style={{ color: "#9A968F" }}>
-          Stack
-        </a>
+        {LINKS.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="edo-nav-link"
+            onMouseEnter={() => setHovered(l.href)}
+            style={{ position: "relative", color: "#9A968F", paddingBottom: 3 }}
+          >
+            {l.label}
+            {hovered === l.href && (
+              <motion.span
+                layoutId="edo-nav-underline"
+                transition={{ duration: 0.3, ease: EASE }}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: 1,
+                  background: "var(--accent, #E8A33D)",
+                }}
+              />
+            )}
+          </a>
+        ))}
       </nav>
-      <a
+      <motion.a
         href="#contact"
         className="font-mono edo-cta-outline"
+        whileHover={{ scale: 1.035 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ duration: 0.2, ease: EASE }}
         style={{
           fontSize: 12,
           letterSpacing: ".1em",
@@ -66,7 +101,7 @@ export default function Header() {
         }}
       >
         Démarrer un projet
-      </a>
-    </header>
+      </motion.a>
+    </motion.header>
   );
 }
